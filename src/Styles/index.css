@@ -6,7 +6,6 @@
   font-family: Inter;
 }
 body {
-  
   margin: 0rem;
   background-color: #121214;
 }
@@ -48,5 +47,6 @@ body {
   --semibold: 600;
   --reguar: 500;
   --light: 400;
-
+  
+  font-size: 16px;
 }
