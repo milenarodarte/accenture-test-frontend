@@ -6,6 +6,7 @@ function CompanySuppliers() {
     <DivPages>
       <Header />
       <MainCompanySupplier />
+      <div></div>
     </DivPages>
   );
 }

@@ -1,8 +1,7 @@
-import MainStyled from "../../Styles/main";
 import Button from "../Button";
 function SupplierCard() {
   return (
-    <MainStyled>
+    <div>
       <div className="cardSuppliers">
         <div className="dataSuppliers">
           <p className="dataSupplierName"> NOME COMPLETO</p>
@@ -21,7 +20,7 @@ function SupplierCard() {
           <Button className="updateButton">Editar</Button>
         </div>
       </div>
-    </MainStyled>
+    </div>
   );
 }
 

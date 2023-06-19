@@ -1,55 +1,83 @@
-import MainStyled from "../../Styles/main";
 import { useForm } from "react-hook-form";
-
 import Button from "../Button";
-
+import MainNew from "../../Styles/mainnew";
 import SearchSuppliers from "../Search/SearchSuppliers";
-
+import SupplierRelationShip from "../Relationships/SupplierRelationship";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import CompanyRelationShip from "../Relationships/CompanyRelationShip";
 function MainCompanySupplier() {
+  const FormSchema = yup.object().shape({
+    company_id: yup.number(),
+    supplier_id: yup.number(),
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(FormSchema),
+  });
   return (
-    <MainStyled>
+    <MainNew>
       <div className="left">
         <div className="supplierForm">
-          <h2 className="companySupplierTitle">
-            Relacionamento Empresa com Fornecedor
-          </h2>
+          <div className="containerForm">
+            <p className="h1Pagina">Relacionamento Empresa com Fornecedor</p>
 
-          <div className="form">
-            <form className="formCompany" onSubmit={handleSubmit}>
-              <label>ID fornecedor</label>
-              <input
-                className="inputFormID"
-                type="text"
-                {...register("Name")}
-                placeholder="Nome"
-              />
-              {errors.title?.message}
-              <label>ID empresa</label>
+            <div className="formRelationship">
+              <form className="formPage">
+                <div className="formRow">
+                  <div className="formColumn">
+                    <label htmlFor="company_id" className="labelForm">
+                      ID Empresa
+                    </label>
+                    <input
+                      id="company_id"
+                      className="inputFormulario"
+                      type="text"
+                      {...register("company_id")}
+                      placeholder="ID"
+                    />
+                    {errors.company_id?.message}
+                  </div>
+                  <div className="formColumn">
+                    <label htmlFor="supplier_id" className="labelForm">
+                      ID fornecedor
+                    </label>
+                    <input
+                      id="supplier_id"
+                      className="inputFormulario"
+                      type="text"
+                      {...register("supplier_id")}
+                      placeholder="ID"
+                    />
+                    {errors.supplier_id?.message}
+                  </div>
+                </div>
+                <div className="buttonsForm">
+                  <div className="collorButtons">
+                    <Button className="deleteButton">Excluir</Button>
+                    <Button className="addButton">Adiconar</Button>
+                  </div>
 
-              <input
-                className="inputForm"
-                type="text"
-                {...register("Email")}
-                placeholder="Seu e-mail"
-              />
-              {errors.title?.message}
-
-              <Button className="buttonSubmit" type="submit">
-                Cadastrar Fornecedor
-              </Button>
-            </form>
+                  <Button className="findButton">Buscar Relacionamento</Button>
+                  <Button className="findButton">
+                    Buscar por ID da empresa
+                  </Button>
+                  <Button className="findButton">
+                    Buscar por ID do fornecedor
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
       <div className="right">
-        <SearchSuppliers />
+        <SupplierRelationShip />
       </div>
-    </MainStyled>
+    </MainNew>
   );
 }
 

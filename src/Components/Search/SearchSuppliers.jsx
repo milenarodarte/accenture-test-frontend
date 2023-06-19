@@ -1,14 +1,9 @@
-import MainStyled from "../../Styles/main";
 import { useForm } from "react-hook-form";
 
 import Button from "../Button";
 
 function SearchSuppliers() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit } = useForm();
   return (
     <div>
       <div className="companySearch">

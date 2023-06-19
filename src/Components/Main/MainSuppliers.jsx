@@ -3,13 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "../Button";
-import UpdateCompany from "../Modal/UpdateCompany";
-import DeleteConfirmationCompany from "../Modal/DeleteConfirmationCompany";
-import CompanyCard from "../Cards/CompanyCard";
-import SupplierCard from "../Cards/SupplierCard";
-import SearchCompany from "../Search/SearchCompany";
+
 import SearchSuppliers from "../Search/SearchSuppliers";
-import UpdateSupplier from "../Modal/UpdateSupplier";
 
 function MainSuppliers() {
   const FormSchema = yup.object().shape({
