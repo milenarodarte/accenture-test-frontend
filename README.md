@@ -33,109 +33,21 @@ REACT-TOSTIFY para toasts.
 
 # ROTAS URL (http://localhost:<SERVER_PORT>)
 
-```json
-
-###http://localhost:<SERVER_PORT>/*
+```
+http://localhost:3000/*
 Rota de erro, com botão para voltar à porta principal
 
+http://localhost:3000/
+Rota principal com CRUD de empresas
+
+http://localhost:3000/suppliers
+Rota suppliers com CRUD de fornecedores
+
+http://localhost:3000/companies_suppliers
+Rota com destino de CRUD dos relacionamentos entre empresas e fornecedores.
+No momento, nessa rota, apenas a possibilidade de adicionar o relacionamento entre empresas e fornecedores está ativo. 
 
 
 ```
-
-## COMPANIES 
-
-### GET (/companies)
-retorno de todas as companies cadastradas no banco de dados. 
-
-### GET (/companies/{id})
-retorno da company buscada por seu ID.
-
-### GET (/companies/cnpj/{cnpj}) 
-retorno da company buscada por seu CNPJ
-
-### GET (companies/business_name/{businessName})
-retorno das companies por seu business_name 
-
-### POST (/companies) 
-criaçao da company através do corpo completo de requisição: 
-```json
-{ "business_name": "string", "cnpj": "string", "cep": "string" }
-```
-
-### PUT (companies/{id})
-update da company através do envio do seu id e corpo completo de requisição: 
-```json
-{ "business_name": "string", "cnpj": "string", "cep": "string" }
-```
-
-### DELETE (/companies/{id})
-deleçao a company e seus respectivos relacionamentos
-
-### POST (companies/{companyId}/supplier/{supplierId})
-relaciona um supplier a uma company através dos seus ids passados no parâmetro. 
-
-### DELETE (companies/{companyId}/supplier/{supplierId})
-deleta o relacionamento de um supplier com uma company
-
-
-## SUPPLIERS
-
-### GET (/suppliers)
-retorno de todas os suppliers cadastradas no banco de dados. 
-
-### GET (/suppliers/{id})
-retorno do supplier buscada por seu ID.
-
-### GET (/suppliers/name/{name})
-retorno dos suppliers por seu name 
-
-### GET (/suppliers/cpfcnpj/{cpfcnpj}) 
-retorno do supplier buscado por seu CNPJ ou CPF
-
-### POST (/suppliers) 
-criaçao do supplier através do envio do seu id e corpo completo de requisição: 
-```json
-  {	
-    "name": "string",	
-    "cpfCnpj": "string", 
-    "email": "string", 
-    "cep": "string", 
-    "rg": "string", 
-    "birthdate": "YYYY-MM-DD"
-  }
-```
-- _RG e Birthdate apenas para pessoa física._
-
-### PUT (/suppliers/{id})
-update do supplier através do envio do seu id e corpo completo de requisição: 
-```json
-  {	
-    "name": "string",	
-    "cpfCnpj": "string", 
-    "email": "string", 
-    "cep": "string", 
-    "rg": "string", 
-    "birthdate": "YYYY-MM-DD"
-  }
-```
-- _RG e Birthdate apenas para pessoa física._
-
-### DELETE (suppliers/{Id})
-deleta um supplier e seus respectivos relacionamentos
-
-## COMPANY_SUPPLIER (/companies_suppliers)
-
-
-### GET (/companies_suppliers)
-retorno de todops os relacionamentos cadastradas no banco de dados. 
-
-### GET (/companies_suppliers/company_id/{companyId})
-retorno de todops os relacionamentos que tiverem o id da company_id passada. 
-
-### GET (/companies_suppliers/supplier_id/{supplierId})
-retorno de todops os relacionamentos que tiverem o id do supplier_id passada. 
-
-### GET (/companies_suppliers/company_id/{companyId}/supplier_id/{supplierId})
-retorno de todops o relacionamento que corresponder a company_id com o supplier_id passado. 
 
 
