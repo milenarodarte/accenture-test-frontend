@@ -1,70 +1,127 @@
-# Getting Started with Create React App
+# Front-end Companies-Suppliers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Pontos a se destacar:
+Esse front-end foi desenvolvido em 1 dia e meio e, apesar de apresentar CRUD das duas entidades requisitadas e todos os requisitos pedidos no projeto, o projeto está incompleto e falta implementar a renderização dos relacionamentos entre Companies e Suppliers. 
 
-## Available Scripts
+## Linguagem de programação escolhida: Javascript com React.js e gerenciados de pacotes Yarn.
+REACT-HOOK-FORM para criação de formulários.
 
-In the project directory, you can run:
+AXIOS para requisições.
 
-### `yarn start`
+REACT-ROUTER-DOM para definir rotas URL e gerenciar a single page application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+STYLED-COMPONENTS para componentização e reaproveitamente de código CSS.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+YUP para validação de formu[arios;
 
-### `yarn test`
+REACT-TOSTIFY para toasts.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+# COMO INICIALIZAR O PROJETO
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. clone o repositório em sua máquina
+2. verifique se já há instalado o Node.js.
+```
+3. importar o projeto para sua IDE de preferência. No desenvolvimento desse projeto, foi utilizado o VScode.
+4. verifique se há oo Yarn na sua máquina.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# ROTAS (http://localhost:<SERVER_PORT>)
+## COMPANIES 
 
-### `yarn eject`
+### GET (/companies)
+retorno de todas as companies cadastradas no banco de dados. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### GET (/companies/{id})
+retorno da company buscada por seu ID.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### GET (/companies/cnpj/{cnpj}) 
+retorno da company buscada por seu CNPJ
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### GET (companies/business_name/{businessName})
+retorno das companies por seu business_name 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### POST (/companies) 
+criaçao da company através do corpo completo de requisição: 
+```json
+{ "business_name": "string", "cnpj": "string", "cep": "string" }
+```
 
-## Learn More
+### PUT (companies/{id})
+update da company através do envio do seu id e corpo completo de requisição: 
+```json
+{ "business_name": "string", "cnpj": "string", "cep": "string" }
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### DELETE (/companies/{id})
+deleçao a company e seus respectivos relacionamentos
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### POST (companies/{companyId}/supplier/{supplierId})
+relaciona um supplier a uma company através dos seus ids passados no parâmetro. 
 
-### Code Splitting
+### DELETE (companies/{companyId}/supplier/{supplierId})
+deleta o relacionamento de um supplier com uma company
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## SUPPLIERS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### GET (/suppliers)
+retorno de todas os suppliers cadastradas no banco de dados. 
 
-### Making a Progressive Web App
+### GET (/suppliers/{id})
+retorno do supplier buscada por seu ID.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### GET (/suppliers/name/{name})
+retorno dos suppliers por seu name 
 
-### Advanced Configuration
+### GET (/suppliers/cpfcnpj/{cpfcnpj}) 
+retorno do supplier buscado por seu CNPJ ou CPF
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### POST (/suppliers) 
+criaçao do supplier através do envio do seu id e corpo completo de requisição: 
+```json
+  {	
+    "name": "string",	
+    "cpfCnpj": "string", 
+    "email": "string", 
+    "cep": "string", 
+    "rg": "string", 
+    "birthdate": "YYYY-MM-DD"
+  }
+```
+- _RG e Birthdate apenas para pessoa física._
 
-### Deployment
+### PUT (/suppliers/{id})
+update do supplier através do envio do seu id e corpo completo de requisição: 
+```json
+  {	
+    "name": "string",	
+    "cpfCnpj": "string", 
+    "email": "string", 
+    "cep": "string", 
+    "rg": "string", 
+    "birthdate": "YYYY-MM-DD"
+  }
+```
+- _RG e Birthdate apenas para pessoa física._
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### DELETE (suppliers/{Id})
+deleta um supplier e seus respectivos relacionamentos
 
-### `yarn build` fails to minify
+## COMPANY_SUPPLIER (/companies_suppliers)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### GET (/companies_suppliers)
+retorno de todops os relacionamentos cadastradas no banco de dados. 
+
+### GET (/companies_suppliers/company_id/{companyId})
+retorno de todops os relacionamentos que tiverem o id da company_id passada. 
+
+### GET (/companies_suppliers/supplier_id/{supplierId})
+retorno de todops os relacionamentos que tiverem o id do supplier_id passada. 
+
+### GET (/companies_suppliers/company_id/{companyId}/supplier_id/{supplierId})
+retorno de todops o relacionamento que corresponder a company_id com o supplier_id passado. 
+
+
