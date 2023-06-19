@@ -19,15 +19,29 @@ REACT-TOSTIFY para toasts.
 
 # COMO INICIALIZAR O PROJETO
 
+```
 1. clone o repositório em sua máquina
 2. verifique se já há instalado o Node.js.
-```
 3. importar o projeto para sua IDE de preferência. No desenvolvimento desse projeto, foi utilizado o VScode.
-4. verifique se há oo Yarn na sua máquina.
+4. verifique se há o Yarn na sua máquina.
+5. no terminal, dentro do da pasta raiz do projeto, digite o comando: yarn install e dê enter.
+6. após verificar que as dependências foram instaladas, na mesma pasta, digite o comando: yarn start e dê enter.
+7. O projeto estará rodando por padrão na porta http://localhost:3000/
+
 ```
 
 
-# ROTAS (http://localhost:<SERVER_PORT>)
+# ROTAS URL (http://localhost:<SERVER_PORT>)
+
+```json
+
+###http://localhost:<SERVER_PORT>/*
+Rota de erro, com botão para voltar à porta principal
+
+
+
+```
+
 ## COMPANIES 
 
 ### GET (/companies)
