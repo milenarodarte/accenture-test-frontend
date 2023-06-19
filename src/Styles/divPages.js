@@ -5,6 +5,7 @@ const DivPages = styled.div`
   width: 100vw;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   height: 100vh;
   background: #e0e0e0;
   @media (max-width: 720px) {
