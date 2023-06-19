@@ -1,91 +1,41 @@
 import MainStyled from "../../Styles/main";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import Button from "../Button";
-import UpdateCompany from "../Modal/UpdateCompany";
-import DeleteConfirmationCompany from "../Modal/DeleteConfirmationCompany";
-import CompanyCard from "../Cards/CompanyCard";
-import SupplierCard from "../Cards/SupplierCard";
-import SearchCompany from "../Search/SearchCompany";
-import SearchSuppliers from "../Search/SearchSuppliers";
-import UpdateSupplier from "../Modal/UpdateSupplier";
 
-function MainSuppliers() {
-  const FormSchema = yup.object().shape({
-    Name: yup.string().required("Nome Fantasia obrigatório"),
-    Email: yup.string().required("E-mail obrigatório"),
-    CPF_CNPJ: yup.string().required("CNPJ obrigatório"),
-    CEP: yup.string().required("CEP obrigatório"),
-    Birthdate: yup.date(),
-    Rg: yup.string(),
-  });
+import Button from "../Button";
+
+import SearchSuppliers from "../Search/SearchSuppliers";
+
+function MainCompanySupplier() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(FormSchema),
-  });
+  } = useForm();
   return (
     <MainStyled>
       <div className="left">
         <div className="supplierForm">
-          <h1 className="companyTitle">Cadastro Relacionamento</h1>
+          <h2 className="companySupplierTitle">
+            Relacionamento Empresa com Fornecedor
+          </h2>
 
           <div className="form">
-            <form className="formCompany" onSubmit={handleSubmit()}>
-              <label>Nome</label>
+            <form className="formCompany" onSubmit={handleSubmit}>
+              <label>ID fornecedor</label>
               <input
-                className="inputForm"
+                className="inputFormID"
                 type="text"
                 {...register("Name")}
                 placeholder="Nome"
               />
               {errors.title?.message}
-              <label>E-mail</label>
+              <label>ID empresa</label>
 
               <input
                 className="inputForm"
                 type="text"
                 {...register("Email")}
                 placeholder="Seu e-mail"
-              />
-              {errors.title?.message}
-
-              <label>CPF ou CNPJ</label>
-              <input
-                className="inputForm"
-                type="text"
-                {...register("CPF_CNPJ")}
-                placeholder="CPF OU CNPJ apenas números"
-              />
-              {errors.title?.message}
-
-              <label>CEP</label>
-              <input
-                className="inputForm"
-                type="text"
-                {...register("CEP")}
-                placeholder="CEP - apenas números"
-              />
-              {errors.title?.message}
-
-              <label>Data de Nascimento apenas pessoa física</label>
-              <input
-                className="inputForm"
-                type="text"
-                {...register("Birthdate")}
-                placeholder="formato: AAAA-MM-DD"
-              />
-              {errors.title?.message}
-
-              <label>RG apenas pessoa física</label>
-              <input
-                className="inputForm"
-                type="text"
-                {...register("Rg")}
-                placeholder="RG apenas números"
               />
               {errors.title?.message}
 
@@ -103,4 +53,4 @@ function MainSuppliers() {
   );
 }
 
-export default MainSuppliers;
+export default MainCompanySupplier;

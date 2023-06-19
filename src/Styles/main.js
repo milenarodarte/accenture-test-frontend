@@ -219,6 +219,22 @@ const MainStyled = styled.main`
       display: flex;
       gap: 1rem;
     }
+    .containerRelationship {
+      width: 10rem;
+      background-color: pink;
+      height: 10rem;
+      border: 1.5px solid black;
+    }
+    .inputFormID {
+      margin-bottom: 1.2rem;
+      height: 2.5rem;
+      border-radius: 0.3rem;
+      border-width: 1px;
+      border-color: #e9ecef;
+      padding-left: 1rem;
+      border: 1.5px solid #e9ecef;
+      width: 5rem;
+    }
   }
 `;
 
