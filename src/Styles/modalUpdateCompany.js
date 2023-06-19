@@ -10,6 +10,18 @@ const DivModalUpdate = styled.div`
   align-items: center;
   justify-content: center;
 
+  .supplierForm {
+    height: 85vh;
+    width: 22.5rem;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    padding: 3rem 1rem 3rem 1rem;
+  }
+
   .companyForm {
     height: 54vh;
     width: 22.5rem;

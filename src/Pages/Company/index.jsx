@@ -1,11 +1,11 @@
 import Header from "../../Components/Header/Header";
 import DivPages from "../../Styles/divPages";
-import Main from "../../Components/MainCompany/Main";
+import MainCompany from "../../Components/Main/MainCompany";
 function Company() {
   return (
     <DivPages>
-      <Header></Header>
-      <Main></Main>
+      <Header />
+      <MainCompany />
     </DivPages>
   );
 }

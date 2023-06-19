@@ -32,6 +32,17 @@ const MainStyled = styled.main`
     }
     padding: 2rem 1rem 2rem 1rem;
   }
+  .supplierForm {
+    height: 85vh;
+    width: 22.5rem;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    padding: 3rem 1rem 3rem 1rem;
+  }
   .companySearch {
     height: 85vh;
     width: 22.5rem;
