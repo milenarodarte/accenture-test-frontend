@@ -191,8 +191,8 @@ const MainStyled = styled.main`
     }
     .dataSupplierName {
       font-weight: 500;
-      font-size: 16px;
-      line-height: 20px;
+      font-size: 1rem;
+      line-height: 1.25rem;
       color: #000000;
       overflow-x: hidden;
       display: flex;
@@ -200,8 +200,8 @@ const MainStyled = styled.main`
     .dataSupplierElse {
       font-style: normal;
       font-weight: 500;
-      font-size: 14px;
-      line-height: 18px;
+      font-size: 0.875rem;
+      line-height: 1.125rem;
       overflow-x: hidden;
     }
     .dataCepId {

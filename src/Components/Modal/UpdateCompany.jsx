@@ -19,7 +19,7 @@ function UpdateCompany() {
   return (
     <DivModalUpdate>
       <div className="companyForm">
-        <h1 className="companyTitle">Alterar Empresa</h1>
+        <h1 className="companyTitle">Editar Empresa</h1>
 
         <div className="form">
           <form onSubmit={handleSubmit()}>
@@ -52,6 +52,7 @@ function UpdateCompany() {
               Alterar Empresa
             </Button>
           </form>
+          <Button className="buttonCloseModal">Cancelar</Button>
         </div>
       </div>
     </DivModalUpdate>

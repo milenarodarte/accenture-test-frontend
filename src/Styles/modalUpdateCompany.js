@@ -8,9 +8,10 @@ const DivModalUpdate = styled.div`
   top: 0rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   .companyForm {
-    height: 50vh;
+    height: 54vh;
     width: 22.5rem;
     background-color: #ffffff;
     border-radius: 0.25rem;
@@ -44,6 +45,36 @@ const DivModalUpdate = styled.div`
   .buttonSubmit {
     background-color: #000000;
     color: #ffffff;
+  }
+  .buttonCloseModal {
+    background-color: #a65252;
+    margin-top: 1rem;
+    width: 100%;
+    color: #fff;
+  }
+  .deleteDiv {
+    background-color: #fff;
+    width: 22rem;
+    height: 16rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  .askP {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .buttonDeleteConfirmation {
+    background-color: #a65252;
+    width: 100%;
+  }
+  .buttonCancelDeleteConfirmaiton {
+    background-color: #72a652;
+    width: 100%;
   }
 `;
 export default DivModalUpdate;

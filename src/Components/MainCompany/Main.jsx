@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "../Button";
+import UpdateCompany from "../Modal/UpdateCompany";
+import DeleteConfirmationCompany from "../Modal/DeleteConfirmationCompany";
 function Main() {
   const FormSchema = yup.object().shape({
     businessName: yup.string().required("Nome Fantasia obrigatório"),
@@ -18,6 +20,7 @@ function Main() {
   });
   return (
     <MainStyled>
+      <DeleteConfirmationCompany />
       <div className="left">
         <div className="companyForm">
           <h1 className="companyTitle">Cadastro Empresa</h1>
