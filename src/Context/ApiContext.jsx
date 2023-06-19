@@ -3,43 +3,79 @@ import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import axios from "axios";
-
+import { settingContext } from "./SettingContext";
 export const apiContext = createContext({});
 export const APIProvider = ({ children }) => {
-  const [searchResponse, setSearchResponse] = useState(null);
-  const [allCompanies, setAllCompanies] = useState(null);
-  const [allSuppliers, setAllSuppliers] = useState(null);
-  const onSubmitFunctionSuppliers = (data) => {
+  const { setModalUpdateON } = useContext(settingContext);
+  const [searchResponse, setSearchResponse] = useState([]);
+
+  const [cepOk, setCepOk] = useState(false);
+
+  const verifyCEP = (data) => {
     axios
-      .post("http://localhost:2000/suppliers", data, {
+      .get(`http://cep.la/${data.cep}`, {
         headers: {
-          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       })
       .then((response) => {
-        toast.success("Supplier criado com sucesso");
+        const city = response.data.cidade;
+        if (city.length > 0) {
+          setCepOk(true);
+        } else {
+          toast.error("CEP inválido");
+          setCepOk(false);
+        }
       })
       .catch((err) => {
-        toast.error("ERRO ao adicionar fornecedor");
+        toast.error("CEP inválido");
         toast.error(err);
         console.log(err);
+        setCepOk(false);
       });
   };
 
+  const onSubmitFunctionSuppliers = (data) => {
+    verifyCEP(data);
+    if (cepOk) {
+      axios
+        .post("http://localhost:2000/suppliers", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          toast.success("Supplier criado com sucesso");
+        })
+        .catch((err) => {
+          toast.error("ERRO ao adicionar fornecedor");
+          toast.error(err);
+          console.log(err);
+        });
+    } else {
+      toast.error("ERRO ao adicionar fornecedor");
+    }
+  };
+
   const onSubmitFunctionCompanies = (data) => {
-    axios
-      .post("http://localhost:2000/companies", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        toast.success("Supplier criado com sucesso");
-      })
-      .catch((err) => {
-        toast.error("ERRO ao adicionar fornecedor");
-        console.log(err);
-      });
+    verifyCEP(data);
+    if (cepOk) {
+      axios
+        .post("http://localhost:2000/companies", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          toast.success("Empresa criada com sucesso");
+        })
+        .catch((err) => {
+          toast.error("ERRO ao adicionar fornecedor");
+          console.log(err);
+        });
+    } else {
+      toast.error("ERRO ao adicionar empresa");
+    }
   };
 
   const onSubmitFunctionRelantionship = (data) => {
@@ -61,13 +97,12 @@ export const APIProvider = ({ children }) => {
 
     if (isNaN(dataSubmit)) {
       axios
-        .get(`http://localhost:2000/suppliers/name/${dataSubmit}`)
+        .get(`http://localhost:2000/suppliers/name/${data.search}`)
         .then((response) => {
-          console.log(response);
           if (response.data.length === 0) {
             toast.error("Fornecedor não encontrado");
           }
-          setSearchResponse(response);
+          setSearchResponse(response.data);
         })
         .catch((err) => {
           toast.error("Fornecedor não encontrado");
@@ -75,9 +110,9 @@ export const APIProvider = ({ children }) => {
         });
     } else {
       axios
-        .get(`http://localhost:2000/suppliers/cpfcnpj/${dataSubmit}`)
+        .get(`http://localhost:2000/suppliers/cpfcnpj/${data.search}`)
         .then((response) => {
-          setSearchResponse(response);
+          setSearchResponse(response.data);
           if (response.data.length === 0) {
             toast.error("Fornecedor não encontrado");
           }
@@ -93,12 +128,12 @@ export const APIProvider = ({ children }) => {
 
     if (isNaN(dataSubmit)) {
       axios
-        .get(`http://localhost:2000/companies/business_name/${dataSubmit}`)
+        .get(`http://localhost:2000/companies/business_name/${data.search}`)
         .then((response) => {
           if (response.data.length === 0) {
             toast.error("Fornecedor não encontrado");
           }
-          setSearchResponse(response);
+          setSearchResponse(response.data);
         })
         .catch((err) => {
           toast.error("Fornecedor não encontrado");
@@ -106,9 +141,9 @@ export const APIProvider = ({ children }) => {
         });
     } else {
       axios
-        .get(`http://localhost:2000/companies/cnpj/${dataSubmit}`)
+        .get(`http://localhost:2000/companies/cnpj/${data.search}`)
         .then((response) => {
-          setSearchResponse(response);
+          setSearchResponse(response.data);
           if (response.data.length === 0) {
             toast.error("Fornecedor não encontrado");
           }
@@ -123,7 +158,7 @@ export const APIProvider = ({ children }) => {
     axios
       .get(`http://localhost:2000/companies`)
       .then((response) => {
-        setAllCompanies(response.data);
+        setSearchResponse(response.data);
         if (response.data.length === 0) {
           toast.error("Nenhuma empresa no bando de dados");
         }
@@ -137,18 +172,78 @@ export const APIProvider = ({ children }) => {
     axios
       .get(`http://localhost:2000/suppliers`)
       .then((response) => {
-        setAllSuppliers(response.data);
+        setSearchResponse(response.data);
         if (response.data.length === 0) {
           toast.error("Nenhum fornecedor no bando de dados");
         }
-        setSearchResponse(response);
       })
       .catch((err) => {
         toast.error("Nenhum fornecedor no bando de dados");
         console.log(err);
       });
   };
+  const onClickDeleteCompany = ({ id }) => {
+    axios
+      .delete(`http://localhost:2000/companies/${id}`)
+      .then((response) => {
+        setSearchResponse(response.data);
+        toast.success("Empresa deletada");
+      })
+      .catch((err) => {
+        toast.error("Erro: não deletada");
+        console.log(err);
+      });
+  };
+  const onClickDeleteSupplier = ({ id }) => {
+    axios
+      .delete(`http://localhost:2000/suppliers/${id}`)
+      .then((response) => {
+        setSearchResponse(response.data);
+        toast.success("Fornecedor deletado");
+      })
+      .catch((err) => {
+        toast.error("Erro: não deletado");
+        console.log(err);
+      });
+  };
+  const onSubmitUpdateSupplier = (data) => {
+    verifyCEP(data);
+    if (cepOk) {
+      const id = data.id;
 
+      axios
+        .put(`http://localhost:2000/suppliers/${id}`, data)
+        .then((response) => {
+          toast.success("Fornecedor editado");
+          setModalUpdateON(false);
+        })
+        .catch((err) => {
+          toast.error("Erro: não editado");
+          console.log(err);
+        });
+    } else {
+      toast.error("ERRO ao editar fornecedor");
+    }
+  };
+  const onSubmitUpdateCompany = (data) => {
+    verifyCEP(data);
+    if (cepOk) {
+      const id = data.id;
+
+      axios
+        .put(`http://localhost:2000/companies/${id}`, data)
+        .then((response) => {
+          toast.success("Empresa editada");
+          setModalUpdateON(false);
+        })
+        .catch((err) => {
+          toast.error("Erro: não editada");
+          console.log(err);
+        });
+    } else {
+      toast.error("ERRO ao editar fornecedor");
+    }
+  };
   return (
     <apiContext.Provider
       value={{
@@ -159,6 +254,12 @@ export const APIProvider = ({ children }) => {
         onSubmitSearchCompany,
         onClickFindAllCompanies,
         onClickFindAllSuppliers,
+        searchResponse,
+        onClickDeleteCompany,
+        onClickDeleteSupplier,
+        onSubmitUpdateSupplier,
+        onSubmitUpdateCompany,
+        verifyCEP,
       }}
     >
       {children}

@@ -1,7 +1,5 @@
 import React from "react";
 import { createContext, useState } from "react";
-import { toast } from "react-toastify";
-import { useContext } from "react";
 
 export const settingContext = createContext({});
 export const SettingProvider = ({ children }) => {

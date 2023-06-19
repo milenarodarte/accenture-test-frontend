@@ -5,14 +5,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useContext } from "react";
 import { settingContext } from "../../Context/SettingContext";
+import { apiContext } from "../../Context/ApiContext";
 import React from "react";
 
 function UpdateSupplier() {
   const { setModalUpdateON } = useContext(settingContext);
+  const { onSubmitUpdateSupplier } = useContext(apiContext);
   const FormSchema = yup.object().shape({
-    businessName: yup.string().required("Nome Fantasia obrigatório"),
-    CNPJ: yup.string().required("CNPJ obrigatório"),
-    CEP: yup.string().required("CEP obrigatório"),
+    name: yup.string().required("Nome Fantasia obrigatório"),
+    email: yup.string().required("Email obrigatório"),
+    cpfCnpj: yup.string().required("CPF ou CNPJ obrigatório"),
+    id: yup.string().required("ID obrigatório"),
+    cep: yup.string().required("CEP obrigatório"),
+    birthdate: yup.string(),
+    rg: yup.string(),
   });
   const {
     register,
@@ -21,18 +27,22 @@ function UpdateSupplier() {
   } = useForm({
     resolver: yupResolver(FormSchema),
   });
+
   return (
     <DivModalUpdate>
       <div className="supplierForm">
         <h1 className="companyTitle">Editar Fornecedor</h1>
 
         <div className="form">
-          <form className="formCompany" onSubmit={handleSubmit()}>
+          <form
+            className="formCompany"
+            onSubmit={handleSubmit(onSubmitUpdateSupplier)}
+          >
             <label>Nome</label>
             <input
               className="inputForm"
               type="text"
-              {...register("Name")}
+              {...register("name")}
               placeholder="Nome"
             />
             {errors.title?.message}
@@ -41,7 +51,7 @@ function UpdateSupplier() {
             <input
               className="inputForm"
               type="text"
-              {...register("Email")}
+              {...register("email")}
               placeholder="Seu e-mail"
             />
             {errors.title?.message}
@@ -50,7 +60,7 @@ function UpdateSupplier() {
             <input
               className="inputForm"
               type="text"
-              {...register("CPF_CNPJ")}
+              {...register("cpfCnpj")}
               placeholder="CPF OU CNPJ apenas números"
             />
             {errors.title?.message}
@@ -59,7 +69,7 @@ function UpdateSupplier() {
             <input
               className="inputForm"
               type="text"
-              {...register("CEP")}
+              {...register("cep")}
               placeholder="CEP - apenas números"
             />
             {errors.title?.message}
@@ -68,7 +78,7 @@ function UpdateSupplier() {
             <input
               className="inputForm"
               type="text"
-              {...register("Birthdate")}
+              {...register("birthdate")}
               placeholder="formato: AAAA-MM-DD"
             />
             {errors.title?.message}
@@ -77,12 +87,20 @@ function UpdateSupplier() {
             <input
               className="inputForm"
               type="text"
-              {...register("Rg")}
+              {...register("rg")}
               placeholder="RG apenas números"
             />
             {errors.title?.message}
+            <label>ID fornecedor</label>
+            <input
+              className="inputForm"
+              type="text"
+              {...register("id")}
+              placeholder="Id fornecedor"
+            />
+            {errors.title?.message}
 
-            <Button className="buttonSubmit" type="submit">
+            <Button className="buttonSubmit" type={"submit"}>
               Editar Fornecedor
             </Button>
           </form>

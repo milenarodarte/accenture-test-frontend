@@ -6,13 +6,15 @@ import * as yup from "yup";
 import { useContext } from "react";
 import { settingContext } from "../../Context/SettingContext";
 import React from "react";
-
+import { apiContext } from "../../Context/ApiContext";
 function UpdateCompany() {
+  const { onSubmitUpdateCompany } = useContext(apiContext);
   const { setModalUpdateON } = useContext(settingContext);
   const FormSchema = yup.object().shape({
-    businessName: yup.string().required("Nome Fantasia obrigatório"),
-    CNPJ: yup.string().required("CNPJ obrigatório"),
-    CEP: yup.string().required("CEP obrigatório"),
+    business_name: yup.string().required("Nome Fantasia obrigatório"),
+    cnpj: yup.string().required("CNPJ obrigatório"),
+    cep: yup.string().required("CEP obrigatório"),
+    id: yup.string(),
   });
   const {
     register,
@@ -27,12 +29,12 @@ function UpdateCompany() {
         <h1 className="companyTitle">Editar Empresa</h1>
 
         <div className="form">
-          <form onSubmit={handleSubmit()}>
+          <form onSubmit={handleSubmit(onSubmitUpdateCompany)}>
             <label>Nome Fantasia</label>
             <input
               className="inputForm"
               type="text"
-              {...register("businessName")}
+              {...register("business_name")}
               placeholder="Nome fantasia"
             />
             {errors.title?.message}
@@ -40,7 +42,7 @@ function UpdateCompany() {
             <input
               className="inputForm"
               type="text"
-              {...register("CNPJ")}
+              {...register("cnpj")}
               placeholder="apenas números"
             />
             {errors.title?.message}
@@ -48,8 +50,16 @@ function UpdateCompany() {
             <input
               className="inputForm"
               type="text"
-              {...register("CEP")}
+              {...register("cep")}
               placeholder="apenas números"
+            />
+            {errors.title?.message}
+            <label>ID empresa</label>
+            <input
+              className="inputForm"
+              type="text"
+              {...register("id")}
+              placeholder="id da empresa"
             />
             {errors.title?.message}
 

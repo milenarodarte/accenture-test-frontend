@@ -48,7 +48,7 @@ function MainCompanySupplier() {
                       {...register("company_id")}
                       placeholder="ID"
                     />
-                    {errors.company_id?.message}
+                    {errors.title?.message}
                   </div>
                   <div className="formColumn">
                     <label htmlFor="supplier_id" className="labelForm">
@@ -61,7 +61,7 @@ function MainCompanySupplier() {
                       {...register("supplier_id")}
                       placeholder="ID"
                     />
-                    {errors.supplier_id?.message}
+                    {errors.title?.message}
                   </div>
                 </div>
                 <div className="buttonsForm">

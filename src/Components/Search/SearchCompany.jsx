@@ -4,9 +4,11 @@ import * as yup from "yup";
 import Button from "../Button";
 import { useContext } from "react";
 import { apiContext } from "../../Context/ApiContext";
+import CompanyCard from "../Cards/CompanyCard";
+import NotFoundCard from "../Cards/NotFoundCard";
 
 function SearchCompany() {
-  const { onSubmitSearchSuppliers, onClickFindAllCompanies } =
+  const { onSubmitSearchCompany, onClickFindAllCompanies, searchResponse } =
     useContext(apiContext);
 
   const FormSchema = yup.object().shape({
@@ -26,7 +28,7 @@ function SearchCompany() {
         <h1 className="companyTitle">Buscar Empresas</h1>
         <form
           className="searchDiv"
-          onSubmit={handleSubmit(onSubmitSearchSuppliers)}
+          onSubmit={handleSubmit(onSubmitSearchCompany)}
         >
           <input
             type={"search"}
@@ -46,7 +48,13 @@ function SearchCompany() {
           Buscar todas as empresas
         </Button>
         <div className="divContainerCards">
-          <div className="divCards"></div>
+          <div className="divCards">
+            {searchResponse.length > 0 ? (
+              searchResponse.map((obj) => <CompanyCard obj={obj} />)
+            ) : (
+              <NotFoundCard />
+            )}
+          </div>
         </div>
       </div>
     </div>

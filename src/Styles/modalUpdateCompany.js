@@ -26,8 +26,8 @@ const DivModalUpdate = styled.div`
   }
 
   .companyForm {
-    height: 54vh;
-    width: 22.5rem;
+    height: 70vh;
+    width: 25rem;
     background-color: #ffffff;
     border-radius: 0.25rem;
     overflow-y: scroll;
