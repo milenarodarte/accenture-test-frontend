@@ -10,6 +10,9 @@ const DivModalUpdate = styled.div`
   align-items: center;
   justify-content: center;
 
+  .container {
+  }
+
   .supplierForm {
     height: 85vh;
     width: 22.5rem;

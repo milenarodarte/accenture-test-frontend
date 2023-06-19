@@ -1,5 +1,10 @@
 import Button from "../Button";
+import { useContext } from "react";
+import { settingContext } from "../../Context/SettingContext";
+import React from "react";
+
 function CompanyCard() {
+  const { setModalDeleteON, setModalUpdateON } = useContext(settingContext);
   return (
     <div>
       <div className="cardCompany">
@@ -10,10 +15,19 @@ function CompanyCard() {
           <p className="dataCompanyElse">ID: 3</p>
         </div>
         <div className="buttonsCardCompany">
-          <Button className="deleteButton" id="dltBtn">
+          <Button
+            className="deleteButton"
+            id="dltBtn"
+            onClick={() => setModalDeleteON(true)}
+          >
             Excluir
           </Button>
-          <Button className="updateButton">Editar</Button>
+          <Button
+            className="updateButton"
+            onClick={() => setModalUpdateON(true)}
+          >
+            Editar
+          </Button>
         </div>
       </div>
     </div>

@@ -1,5 +1,9 @@
 import Button from "../Button";
+import { useContext } from "react";
+import { settingContext } from "../../Context/SettingContext";
+import React from "react";
 function SupplierCard() {
+  const { setModalDeleteON, setModalUpdateON } = useContext(settingContext);
   return (
     <div>
       <div className="cardSuppliers">
@@ -16,8 +20,18 @@ function SupplierCard() {
         </div>
 
         <div className="buttonsCardCompany">
-          <Button className="deleteButton">Excluir</Button>
-          <Button className="updateButton">Editar</Button>
+          <Button
+            className="deleteButton"
+            onClick={() => setModalDeleteON(true)}
+          >
+            Excluir
+          </Button>
+          <Button
+            className="updateButton"
+            onClick={() => setModalUpdateON(true)}
+          >
+            Editar
+          </Button>
         </div>
       </div>
     </div>

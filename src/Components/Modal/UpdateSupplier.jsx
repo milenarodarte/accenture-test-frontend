@@ -3,7 +3,12 @@ import DivModalUpdate from "../../Styles/modalUpdateCompany";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useContext } from "react";
+import { settingContext } from "../../Context/SettingContext";
+import React from "react";
+
 function UpdateSupplier() {
+  const { setModalUpdateON } = useContext(settingContext);
   const FormSchema = yup.object().shape({
     businessName: yup.string().required("Nome Fantasia obrigatório"),
     CNPJ: yup.string().required("CNPJ obrigatório"),
@@ -81,7 +86,12 @@ function UpdateSupplier() {
               Editar Fornecedor
             </Button>
           </form>
-          <Button className="buttonCloseModal">Cancelar</Button>
+          <Button
+            className="buttonCloseModal"
+            onClick={() => setModalUpdateON(false)}
+          >
+            Cancelar
+          </Button>
         </div>
       </div>
     </DivModalUpdate>

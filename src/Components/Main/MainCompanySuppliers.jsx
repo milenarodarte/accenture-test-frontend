@@ -6,7 +6,13 @@ import SupplierRelationShip from "../Relationships/SupplierRelationship";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import CompanyRelationShip from "../Relationships/CompanyRelationShip";
+import { useContext } from "react";
+import { settingContext } from "../../Context/SettingContext";
+import { apiContext } from "../../Context/ApiContext";
+import React from "react";
 function MainCompanySupplier() {
+  const { setModalDeleteON } = useContext(settingContext);
+  const { onSubmitFunctionRelantionship } = useContext(apiContext);
   const FormSchema = yup.object().shape({
     company_id: yup.number(),
     supplier_id: yup.number(),
@@ -26,7 +32,10 @@ function MainCompanySupplier() {
             <p className="h1Pagina">Relacionamento Empresa com Fornecedor</p>
 
             <div className="formRelationship">
-              <form className="formPage">
+              <form
+                className="formPage"
+                onSubmit={handleSubmit(onSubmitFunctionRelantionship)}
+              >
                 <div className="formRow">
                   <div className="formColumn">
                     <label htmlFor="company_id" className="labelForm">
@@ -57,7 +66,12 @@ function MainCompanySupplier() {
                 </div>
                 <div className="buttonsForm">
                   <div className="collorButtons">
-                    <Button className="deleteButton">Excluir</Button>
+                    <Button
+                      className="deleteButton"
+                      onClick={() => setModalDeleteON(true)}
+                    >
+                      Excluir
+                    </Button>
                     <Button className="addButton">Adiconar</Button>
                   </div>
 

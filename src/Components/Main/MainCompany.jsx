@@ -3,13 +3,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "../Button";
-
+import { apiContext } from "../../Context/ApiContext";
 import SearchCompany from "../Search/SearchCompany";
+import { useContext } from "react";
 function MainCompany() {
+  const { onSubmitFunctionCompanies } = useContext(apiContext);
   const FormSchema = yup.object().shape({
-    businessName: yup.string().required("Nome Fantasia obrigatório"),
-    CNPJ: yup.string().required("CNPJ obrigatório"),
-    CEP: yup.string().required("CEP obrigatório"),
+    business_name: yup.string().required("Nome Fantasia obrigatório"),
+    cnpj: yup.string().required("CNPJ obrigatório"),
+    cep: yup.string().required("CEP obrigatório"),
   });
   const {
     register,
@@ -25,12 +27,15 @@ function MainCompany() {
           <h1 className="companyTitle">Cadastro Empresa</h1>
 
           <div className="form">
-            <form className="formCompany" onSubmit={handleSubmit()}>
+            <form
+              className="formCompany"
+              onSubmit={handleSubmit(onSubmitFunctionCompanies)}
+            >
               <label>Nome Fantasia</label>
               <input
                 className="inputForm"
                 type="text"
-                {...register("businessName")}
+                {...register("business_name")}
                 placeholder="Nome fantasia"
               />
               {errors.title?.message}
@@ -38,7 +43,7 @@ function MainCompany() {
               <input
                 className="inputForm"
                 type="text"
-                {...register("CNPJ")}
+                {...register("cnpj")}
                 placeholder="apenas números"
               />
               {errors.title?.message}
@@ -46,7 +51,7 @@ function MainCompany() {
               <input
                 className="inputForm"
                 type="text"
-                {...register("CEP")}
+                {...register("cep")}
                 placeholder="apenas números"
               />
               {errors.title?.message}

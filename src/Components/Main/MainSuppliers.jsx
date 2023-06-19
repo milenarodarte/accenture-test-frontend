@@ -3,17 +3,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "../Button";
-
+import React from "react";
 import SearchSuppliers from "../Search/SearchSuppliers";
+import { useContext } from "react";
+import { apiContext } from "../../Context/ApiContext";
 
 function MainSuppliers() {
+  const { onSubmitFunctionSuppliers } = useContext(apiContext);
   const FormSchema = yup.object().shape({
-    Name: yup.string().required("Nome Fantasia obrigatório"),
-    Email: yup.string().required("E-mail obrigatório"),
-    CPF_CNPJ: yup.string().required("CNPJ obrigatório"),
-    CEP: yup.string().required("CEP obrigatório"),
-    Birthdate: yup.date(),
-    Rg: yup.string(),
+    name: yup.string().required("Nome Fantasia obrigatório"),
+    email: yup.string().required("E-mail obrigatório"),
+    cpfCnpj: yup.string().required("CNPJ obrigatório"),
+    cep: yup.string().required("CEP obrigatório"),
+    birthdate: yup.string(),
+    rg: yup.string(),
   });
   const {
     register,
@@ -29,12 +32,15 @@ function MainSuppliers() {
           <h1 className="companyTitle">Cadastro Fornecedor</h1>
 
           <div className="form">
-            <form className="formCompany" onSubmit={handleSubmit()}>
+            <form
+              className="formCompany"
+              onSubmit={handleSubmit(onSubmitFunctionSuppliers)}
+            >
               <label>Nome</label>
               <input
                 className="inputForm"
                 type="text"
-                {...register("Name")}
+                {...register("name")}
                 placeholder="Nome"
               />
               {errors.title?.message}
@@ -43,7 +49,7 @@ function MainSuppliers() {
               <input
                 className="inputForm"
                 type="text"
-                {...register("Email")}
+                {...register("email")}
                 placeholder="Seu e-mail"
               />
               {errors.title?.message}
@@ -52,7 +58,7 @@ function MainSuppliers() {
               <input
                 className="inputForm"
                 type="text"
-                {...register("CPF_CNPJ")}
+                {...register("cpfCnpj")}
                 placeholder="CPF OU CNPJ apenas números"
               />
               {errors.title?.message}
@@ -61,7 +67,7 @@ function MainSuppliers() {
               <input
                 className="inputForm"
                 type="text"
-                {...register("CEP")}
+                {...register("cep")}
                 placeholder="CEP - apenas números"
               />
               {errors.title?.message}
@@ -70,7 +76,7 @@ function MainSuppliers() {
               <input
                 className="inputForm"
                 type="text"
-                {...register("Birthdate")}
+                {...register("birthdate")}
                 placeholder="formato: AAAA-MM-DD"
               />
               {errors.title?.message}
@@ -79,7 +85,7 @@ function MainSuppliers() {
               <input
                 className="inputForm"
                 type="text"
-                {...register("Rg")}
+                {...register("rg")}
                 placeholder="RG apenas números"
               />
               {errors.title?.message}
