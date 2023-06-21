@@ -50,4 +50,10 @@ No momento, nessa rota, apenas a possibilidade de adicionar o relacionamento ent
 
 ```
 
+# Erros indentificados:
 
+1. *Pesquisa por CNPJ não está retornando resultados;* resolução: por se tratar de um retorno de um único objeto do backend sem está contido num array, o map não consegue fazer sua leitura, sendo necessário adicionar o array manualmente na hora de settar o useState.
+
+2. *Retorno CEP inválido, mesmo ele sendo válido, após uma tentativa de cadastro com CEP inválido, sendo necessário uma segunda tentativa para cadastrar*; resolução: por se tratar de um função chamada dentro de outra função o código segue para a lógica if mesmo sem ter recebido o seu retorno, tornando o CEP válido (true). Uma possível solução englobar em um bloco try{} -> finally{};
+
+3. *Toasts com mensagens de erros diversas das que realmente estão acontecendo;* resolução: o cõdigo foi feito em pouquíssimo tempo, então houve bastante reaproveitamento manual em partes iguais. A solução é trocar as mensagens de toast ou refatorar o código para reaproveitar a function em si passando por parâmetro as mensagens de erro necessárias e tornando o código mais enxuto. 
